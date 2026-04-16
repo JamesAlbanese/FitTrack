@@ -1,7 +1,5 @@
 package fittrack;
 
-import java.io.Serializable;
-
 public enum SplitDay{
 
     PUSH("Push"),
