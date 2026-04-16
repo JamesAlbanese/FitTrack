@@ -1,5 +1,9 @@
-"*.class" 
-"*.dat" 
-"out/" 
-"idea/" 
-"bin/" 
+*.class
+*.dat
+bin/
+out/
+.idea/
+.settings/
+.classpath
+.project
+*.iml
