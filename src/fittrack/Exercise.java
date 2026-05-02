@@ -92,12 +92,33 @@ public class Exercise implements Serializable {
         return sets.size();
     }
 
+    public double getMaxWeight() {
+
+        return sets.stream()
+                   .mapToDouble(ExerciseSet::getWeight)
+                   .max()
+                   .orElse(0.0);
+
+    }
+
+    public boolean hasSets(){
+        return !sets.isEmpty();
+    }
+
     public String getNotes() {
         return notes;
     }
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    private double parseWeight(String key){
+        return Double.parseDouble(key.split(" x ")[1]);
+    }
+
+    private int parseReps(String key){
+        return Integer.parseInt(key.split(" x ")[0]);
     }
 
     @Override
