@@ -1,10 +1,7 @@
 package fittrack;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Exercise implements Serializable {
 
@@ -58,8 +55,16 @@ public class Exercise implements Serializable {
 
         ExerciseSet removed = sets.get(index);
         sets.remove(index);
-        
 
+        String key = removed.getReps() + " x " + removed.getWeight();
+        int current = setFrequency.getOrDefault(key, 0);
+
+        if(current <= 1){
+            setFrequency.remove(key);
+        }
+        else{
+            setFrequency.put(key, current - 1);
+        }
     }
 
     public String getName() {
@@ -68,17 +73,23 @@ public class Exercise implements Serializable {
     }
 
     public void setName(String name) {
-
+        if(name != null || name.trim().isEmpty()){
+            //custom exception
+        }
         this.name = name;
     }
 
     public List<ExerciseSet> getSets() {
 
-        return sets;
+        return Collections.unmodifiableList(sets);
     }
 
-    public void setSets(List<ExerciseSet> sets) {
-        this.sets = sets;
+    public Map<String, Integer> getSetFrequency(){
+        return Collections.unmodifiableMap(setFrequency);
+    }
+
+    public int getTotalSets(){
+        return sets.size();
     }
 
     public String getNotes() {
