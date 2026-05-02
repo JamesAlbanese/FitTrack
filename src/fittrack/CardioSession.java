@@ -31,6 +31,10 @@ public abstract class CardioSession implements Serializable{
         this.duration = duration;
     }
 
+    @Override
+    public String toString(){
+        return getCardioType() + " | " + duration + " min | " + getCardioSummary();
+    }
     
 
 }
