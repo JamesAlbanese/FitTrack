@@ -46,6 +46,20 @@ public class Exercise implements Serializable {
         }
 
         sets.add(new ExerciseSet(reps, weight));
+
+        String key = reps + " x " + weight;
+        setFrequency.put(key, setFrequency.getOrDefault(key, 0) + 1);
+    }
+
+    public void removeSet(int index){
+        if(index < 0 || index >= sets.size()){
+            //custom exception
+        }
+
+        ExerciseSet removed = sets.get(index);
+        sets.remove(index);
+        
+
     }
 
     public String getName() {
