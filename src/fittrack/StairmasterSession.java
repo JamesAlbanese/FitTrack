@@ -35,5 +35,4 @@ public class StairmasterSession extends CardioSession{
         }
         this.speed = speed;
     }
-    
 }
