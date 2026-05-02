@@ -1,6 +1,10 @@
 package fittrack;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Exercise implements Serializable {
 
@@ -8,63 +12,59 @@ public class Exercise implements Serializable {
 
     private String name;
 
-    private int sets;
+    private List<ExerciseSet> sets;
 
-    private int reps;
-
-    private double weight;
+    private Map<String, Integer> setFrequency;
 
     //Optional notes about exercise
     private String notes;
 
-    public Exercise(String name, int sets, int reps, double weight){
+    public Exercise(String name){
         this.name = name;
-        this.sets = sets;
-        this.reps = reps;
-        this.weight = weight;
+        this.sets = new ArrayList<>();
+        this.setFrequency = new HashMap<>();
         this.notes = "";
-
     }
 
-
-    public static Exercise create(String name, int sets, int reps){
+    public static Exercise create(String name){
         // I'm gonna create a custom Exception class so that if the
         // arguments passed to exercise are invalid it will catch and
         //it can be handled somehow
+        if(name == null || name.trim().isEmpty()){
+            //custom exception
+        }
 
-        return new Exercise(name, sets, reps, 0);
+        return new Exercise(name);
+    }
+
+    public void addSet(int reps, double weight){
+        if(reps <= 0){
+            //custom exception
+        }
+        if(weight < 0){
+            //custom exception
+        }
+
+        sets.add(new ExerciseSet(reps, weight));
     }
 
     public String getName() {
+
         return name;
     }
 
     public void setName(String name) {
+
         this.name = name;
     }
 
-    public int getSets() {
+    public List<ExerciseSet> getSets() {
+
         return sets;
     }
 
-    public void setSets(int sets) {
+    public void setSets(List<ExerciseSet> sets) {
         this.sets = sets;
-    }
-
-    public int getReps() {
-        return reps;
-    }
-
-    public void setReps(int reps) {
-        this.reps = reps;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
     }
 
     public String getNotes() {
