@@ -113,18 +113,39 @@ public class Exercise implements Serializable {
         this.notes = notes;
     }
 
-    private double parseWeight(String key){
+    private static double parseWeight(String key){
         return Double.parseDouble(key.split(" x ")[1]);
     }
 
-    private int parseReps(String key){
+    private static int parseReps(String key){
         return Integer.parseInt(key.split(" x ")[0]);
     }
 
     @Override
     public String toString(){
-        //some stringbuilder stuff to nicely format the actual exercise
-        return "";
+        StringBuilder sb = new StringBuilder(name);
+
+        if(!setFrequency.isEmpty()) {
+            setFrequency.entrySet()
+                    .stream()
+                    .sorted(Comparator.comparingDouble((Map.Entry<String, Integer> e) -> parseWeight(e.getKey()))
+                            .thenComparingInt((Map.Entry<String, Integer> e) -> parseReps(e.getKey())))
+                    .forEach(entry -> {
+                        String key = entry.getKey();
+                        int freq = entry.getValue();
+                        int reps = parseReps(key);
+                        double weight = parseWeight(key);
+                        sb.append("\n   ").append(freq)
+                                .append(" x ").append(reps)
+                                .append("(").append(weight).append("lbs)");
+                    });
+        }
+
+        if(!notes.isEmpty()){
+            sb.append("\n Note: ").append(notes);
+        }
+
+        return sb.toString();
         
     }
 }
