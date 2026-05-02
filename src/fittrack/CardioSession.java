@@ -35,6 +35,6 @@ public abstract class CardioSession implements Serializable{
     public String toString(){
         return getCardioType() + " | " + duration + " min | " + getCardioSummary();
     }
-    
+
 
 }
