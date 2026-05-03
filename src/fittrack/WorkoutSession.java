@@ -33,7 +33,7 @@ public class WorkoutSession implements Serializable {
                                                                        .map(SplitDay::getDisplayName)
                                                                        .collect(Collectors.joining(", ")));
         }
-        
+
         this.date = date;
         this.durationMins = durationMins;
         this.split = split;
