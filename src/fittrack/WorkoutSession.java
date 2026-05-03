@@ -18,13 +18,15 @@ public class WorkoutSession implements Serializable {
     private CardioSession cardio;
     private String notes;
 
-    public WorkoutSession(LocalDate date, int durationMins, TrainingSplit split, SplitDay splitDay) throws InvalidWorkoutException{
+    public WorkoutSession(LocalDate date, int durationMins, TrainingSplit split, SplitDay splitDay) throws InvalidWorkoutException, NegativeValueException{
         if(date == null){
             //custom exception
             throw new InvalidWorkoutException("Workout Session must have valid date");
         }
         if(durationMins <= 0){
             //custom exception
+            throw new NegativeValueException("Duration in Minutes", durationMins);
+
         }
         if(!split.containsDay(splitDay)){
             //custom exception

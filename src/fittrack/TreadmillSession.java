@@ -8,12 +8,14 @@ public class TreadmillSession extends CardioSession{
 
     private double incline;
 
-    public TreadmillSession(int duration, double speed, double incline){
+    public TreadmillSession(int duration, double speed, double incline) throws NegativeValueException{
         if(speed <= 0){
             //custom exception
+            throw new NegativeValueException("Speed", speed);
         }
         if(incline < 0){
             //custom exception
+            throw new NegativeValueException("Incline", incline);
         }
         super(duration);
         this.speed = speed;
@@ -34,9 +36,10 @@ public class TreadmillSession extends CardioSession{
         return speed;
     }
 
-    public void setSpeed(double speed){
+    public void setSpeed(double speed) throws NegativeValueException{
         if(speed <= 0){
             //custom exception
+            throw new NegativeValueException("Speed", speed);
         }
 
         this.speed = speed;
@@ -46,9 +49,10 @@ public class TreadmillSession extends CardioSession{
         return incline;
     }
 
-    public void setIncline(double incline){
+    public void setIncline(double incline) throws NegativeValueException{
         if(incline < 0){
             //custom exception
+            throw new NegativeValueException("Incline", incline);
         }
 
         this.incline = incline;

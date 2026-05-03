@@ -6,9 +6,10 @@ public class BikeSession extends CardioSession{
 
     private double resistance;
 
-    public BikeSession(int duration, double resistance){
+    public BikeSession(int duration, double resistance) throws NegativeValueException{
         if(resistance <= 0){
             //custom exception
+            throw new NegativeValueException("Resistance", resistance);
         }
         super(duration);
         this.resistance = resistance;
@@ -29,9 +30,10 @@ public class BikeSession extends CardioSession{
         return resistance;
     }
 
-    public void setResistance(double resistance){
+    public void setResistance(double resistance) throws NegativeValueException{
         if(resistance < 0){
             //custom exception
+            throw new NegativeValueException("Resistance", resistance);
         }
         this.resistance = resistance;
     }

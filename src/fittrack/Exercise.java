@@ -32,12 +32,14 @@ public class Exercise implements Serializable {
         return new Exercise(name);
     }
 
-    public void addSet(int reps, double weight){
+    public void addSet(int reps, double weight) throws NegativeValueException{
         if(reps <= 0){
             //custom exception
+            throw new NegativeValueException("Reps", reps);
         }
         if(weight < 0){
             //custom exception
+            throw new NegativeValueException("Weight", weight);
         }
 
         sets.add(new ExerciseSet(reps, weight));
@@ -46,9 +48,10 @@ public class Exercise implements Serializable {
         setFrequency.put(key, setFrequency.getOrDefault(key, 0) + 1);
     }
 
-    public void removeSet(int index){
+    public void removeSet(int index) throws InvalidWorkoutException,NegativeValueException{
         if(index < 0 || index >= sets.size()){
             //custom exception
+            throw new InvalidWorkoutException("Index not in range. Index doesn't point to valid exercise.");
         }
 
         ExerciseSet removed = sets.get(index);

@@ -6,9 +6,10 @@ public class StairmasterSession extends CardioSession{
 
     private int speed;
 
-    public StairmasterSession(int duration, int speed){
+    public StairmasterSession(int duration, int speed) throws NegativeValueException{
         if(speed <= 0){
             //custom exception
+            throw new NegativeValueException("Speed", speed);
         }
         super(duration);
         this.speed = speed;
@@ -29,9 +30,10 @@ public class StairmasterSession extends CardioSession{
         return speed;
     }
 
-    public void setSpeed(int speed){
+    public void setSpeed(int speed) throws NegativeValueException{
         if(speed <= 0){
             //custom exception
+            throw new NegativeValueException("Speed", speed);
         }
         this.speed = speed;
     }

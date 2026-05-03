@@ -8,9 +8,11 @@ public abstract class CardioSession implements Serializable{
 
     private int duration;
 
-    public CardioSession(int duration){
+    public CardioSession(int duration) throws NegativeValueException{
         if(duration <= 0){
             //custom exception
+            throw new NegativeValueException("Duration", duration);
+
         }
         this.duration = duration;
     }
@@ -23,9 +25,10 @@ public abstract class CardioSession implements Serializable{
         return duration;
     }
 
-    public void setDuration(int duration){
+    public void setDuration(int duration) throws NegativeValueException{
         if(duration <= 0){
             //custom exception
+            throw new NegativeValueException("Duration", duration);
         }
 
         this.duration = duration;

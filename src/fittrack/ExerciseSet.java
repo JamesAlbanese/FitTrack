@@ -15,12 +15,14 @@ public class ExerciseSet implements Serializable{
     private double weight;
 
 
-    public ExerciseSet(int reps, double weight){
+    public ExerciseSet(int reps, double weight)throws NegativeValueException{
         if(reps <= 0){
             //custom exception
+            throw new NegativeValueException("Reps",reps);
         }
         if(weight < 0){
             //custom exception
+            throw new NegativeValueException("Weight",weight);
         }
         this.reps = reps;
         this.weight = weight;
@@ -30,9 +32,10 @@ public class ExerciseSet implements Serializable{
         return reps;
     }
 
-    public void setReps(int reps){
+    public void setReps(int reps)throws NegativeValueException{
         if(reps <= 0){
             //custom exception
+            throw new NegativeValueException("Reps", reps);
         }
 
         this.reps = reps;
@@ -44,9 +47,10 @@ public class ExerciseSet implements Serializable{
     }
 
 
-    public void setWeight(double weight){
+    public void setWeight(double weight)throws NegativeValueException{
         if(weight < 0){
             //custom exception
+            throw new NegativeValueException("Weight", weight);
         }
         this.weight = weight;
     }
