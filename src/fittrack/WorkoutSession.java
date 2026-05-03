@@ -66,4 +66,76 @@ public class WorkoutSession implements Serializable {
         }
         exercises.remove(index);
     }
+
+    public boolean hasExercises(){
+        return !exercises.isEmpty();
+    }
+
+    public boolean hasCardio(){
+        return cardio != null;
+    }
+
+    public int getTotalSets(){
+        return exercises.stream()
+                        .mapToInt(Exercise::getTotalSets)
+                        .sum();
+    }
+
+    public LocalDate getDate(){
+        return date;
+    }
+
+    public void setDate(LocalDate date) throws InvalidWorkoutException{
+        if(date == null){
+            throw new InvalidWorkoutException("Date can't be null");
+        }
+        this.date = date;
+    }
+
+    public int getDurationMins(){
+        return durationMins;
+    }
+
+    public void setDurationMins(int durationMins) throws NegativeValueException{
+        if(durationMins <= 0){
+            throw new NegativeValueException("Duration in Mins", durationMins);
+        }
+        this.durationMins = durationMins;
+    }
+
+    public TrainingSplit getSplit(){
+        return split;
+    }
+
+
+    public SplitDay getSplitDay(){
+        return splitDay;
+    }
+
+    public void setSplitDay(SplitDay splitDay) throws InvalidWorkoutException{
+        if(!split.containsDay(splitDay)){
+            throw new InvalidWorkoutException("'"+splitDay.getDisplayName()+"' is not a valid day for the "
+                    + split.getDisplayName()+ " split. Valid days are: "+ split.getDays().stream()
+                    .map(SplitDay::getDisplayName)
+                    .collect(Collectors.joining(", ")));
+        }
+        this.splitDay = splitDay;
+    }
+
+    public CardioSession getCardio(){
+        return cardio;
+    }
+
+    public void setCard(CardioSession cardio){
+        this.cardio = cardio;
+    }
+
+    public String getNotes(){
+        return notes;
+    }
+
+    public void setNotes(String notes){
+        this.notes = notes;
+    }
+
 }
