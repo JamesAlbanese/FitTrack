@@ -138,4 +138,18 @@ public class WorkoutSession implements Serializable {
         this.notes = notes;
     }
 
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(date)
+                .append(" | ").append(splitDay.getDisplayName())
+                .append(" | ").append(durationMins).append(" min")
+                .append(" | ").append(exercises.size()).append(" exercise(s)");
+        if(hasCardio()){
+            sb.append(" | ").append(cardio.getCardioType());
+        }
+
+        return sb.toString();
+    }
+
 }
