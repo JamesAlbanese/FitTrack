@@ -23,12 +23,10 @@ public class Exercise implements Serializable {
         this.notes = "";
     }
 
-    public static Exercise create(String name){
-        // I'm gonna create a custom Exception class so that if the
-        // arguments passed to exercise are invalid it will catch and
-        //it can be handled somehow
+    public static Exercise create(String name) throws InvalidWorkoutException{
         if(name == null || name.trim().isEmpty()){
             //custom exception
+            throw new InvalidWorkoutException("Exercise must have a name");
         }
 
         return new Exercise(name);
@@ -72,9 +70,10 @@ public class Exercise implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name) throws InvalidWorkoutException{
         if(name != null || name.trim().isEmpty()){
             //custom exception
+            throw new InvalidWorkoutException("Exercise must have a valid name");
         }
         this.name = name;
     }
