@@ -45,4 +45,25 @@ public class WorkoutSession implements Serializable {
         this.notes = "";
 
     }
+
+    public void addExercise(Exercise exercise) throws InvalidWorkoutException{
+        if(exercise == null){
+            throw new InvalidWorkoutException("Exercise can't be null");
+        }
+        exercises.add(exercise);
+    }
+
+    public void addExercise(String name) throws InvalidWorkoutException{
+        if(name == null || name.trim().isEmpty()){
+            throw new InvalidWorkoutException("Exercise name can't be null");
+        }
+        exercises.add(Exercise.create(name));
+    }
+
+    public void removeExercise(int index) throws InvalidWorkoutException{
+        if(index < 0 || index >= exercises.size()){
+            throw new InvalidWorkoutException("Index not in range. Index doesn't point to valid exercise.");
+        }
+        exercises.remove(index);
+    }
 }
