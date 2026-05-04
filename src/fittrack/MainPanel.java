@@ -150,7 +150,7 @@ public class MainPanel extends JPanel {
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
         content.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
 
-        //Header info
+        //Session header info
         content.add(new JLabel(session.getDate()
                 .format(DateTimeFormatter.ofPattern("EEEE, MMMM dd yyyy"))));
         content.add(new JLabel(session.getSplit().getDisplayName() +
@@ -159,5 +159,24 @@ public class MainPanel extends JPanel {
                 " min"));
         content.add(new JSeparator());
         content.add(Box.createVerticalStrut(6));
+
+        //Session exercises
+        if(!session.getExercises().isEmpty()){
+            content.add(boldLabel("Exercises:"));//coming later to make font bolder
+            content.add(Box.createVerticalStrut(4));
+
+            for(Exercise exercise : session.getExercises()){
+                for (String line : exercise.toString().split("\n")) {
+                    content.add(new JLabel(line));
+                }
+                content.add(Box.createVerticalStrut(4));
+            }
+        }
+
+        if(session.hasCardio()){
+            content.add(new JSeparator());
+            content.add(Box.createVerticalStrut(6));
+            content.add(boldLabel("Cardio:"));
+        }
     }
 }
