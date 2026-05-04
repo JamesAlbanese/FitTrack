@@ -10,7 +10,7 @@ import java.util.List;
 public class MainPanel extends JPanel {
 
     private static final DateTimeFormatter DATE_FORMAT =
-            DateTimeFormatter.ofPattern("MM dd, yyyy");
+            DateTimeFormatter.ofPattern("MMMM dd, yyyy");
 
     private final FitTrackApp app;
     private final FitTrackManager manager;
@@ -141,6 +141,23 @@ public class MainPanel extends JPanel {
             }
         });
 
+        return row;
+    }
 
+
+    private void showSessionDetailPopup(WorkoutSession session, int index){
+        JPanel content = new JPanel();
+        content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
+        content.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+
+        //Header info
+        content.add(new JLabel(session.getDate()
+                .format(DateTimeFormatter.ofPattern("EEEE, MMMM dd yyyy"))));
+        content.add(new JLabel(session.getSplit().getDisplayName() +
+                " - " + session.getSplitDay().getDisplayName()));
+        content.add(new JLabel("Duration " + session.getDurationMins() +
+                " min"));
+        content.add(new JSeparator());
+        content.add(Box.createVerticalStrut(6));
     }
 }
