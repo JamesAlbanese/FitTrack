@@ -31,6 +31,17 @@ public class MainPanel extends JPanel {
     }
 
     private JPanel buildHeader(){
-        
+        JPanel header = new JPanel(new BorderLayout());
+        header.setBorder(BorderFactory.createEmptyBorder(0, 0, 8, 0));
+
+        JLabel title = new JLabel("FitTrack");
+        title.setFont(new Font("SansSerif", Font.BOLD, 20));
+
+        JButton logButton = new JButton("+ Log Workout");
+        logButton.addActionListener(/*show workout log*/);
+
+        header.add(title, BorderLayout.WEST);
+        header.add(logButton, BorderLayout.EAST);
+        return header;
     }
 }
