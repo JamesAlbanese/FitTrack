@@ -13,6 +13,7 @@ public class FileHandler {
     //prevents instantiation of filehandler objects
     private FileHandler(){}
 
+
     public static void saveSessions(List<WorkoutSession> sessions) throws IOException {
         try(FileOutputStream FOS = new FileOutputStream(WORKOUT_BINARY);
             ObjectOutputStream OOS = new ObjectOutputStream(FOS)){
