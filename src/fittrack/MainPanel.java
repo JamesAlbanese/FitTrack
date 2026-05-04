@@ -124,6 +124,22 @@ public class MainPanel extends JPanel {
         info.add(dateLabel1);
         info.add(detailLabel1);
 
+        row.add(info, BorderLayout.CENTER);
+
+        row.addMouseListener(new java.awt.event.MouseAdapter(){
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e){
+                showSessionDetailPopup(session, index);//will build this next probably
+            }
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent e){
+                row.setBackground(new Color(230, 230, 230));
+            }
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent e){
+                row.setBackground(null);
+            }
+        });
 
 
     }
