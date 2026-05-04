@@ -1,6 +1,7 @@
 package fittrack;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -54,9 +55,52 @@ public class FitTrackManager {
         return sessions.size();
     }
 
-    public List<WorkoutSession> sortByDateAscending(){
+    public List<WorkoutSession> sortByDateDescending(){
         return sessions.stream()
                        .sorted(Comparator.comparing(WorkoutSession::getDate).reversed())
                        .collect(Collectors.toList());
+    }
+
+
+    public List<WorkoutSession> sortByDateAscending(){
+        return sessions.stream()
+                       .sorted(Comparator.comparing(WorkoutSession::getDate))
+                       .collect(Collectors.toList());
+
+    }
+
+
+    public List<WorkoutSession> sortByDurationDescending(){
+        return sessions.stream()
+                       .sorted(Comparator.comparing(WorkoutSession::getDurationMins).reversed())
+                       .collect(Collectors.toList());
+    }
+
+
+    public List<WorkoutSession> filterBySplit(TrainingSplit split){
+        return sessions.stream()
+                       .filter(s -> s.getSplit() == split)
+                       .collect(Collectors.toList());
+    }
+
+
+    public List<WorkoutSession> filterBySplitDay(SplitDay splitDay){
+        return sessions.stream()
+                       .filter(s -> s.getSplitDay() == splitDay)
+                       .collect(Collectors.toList());
+    }
+
+
+    public List<WorkoutSession> filterByHasCardio(){
+        return sessions.stream()
+                       .filter(s -> s.hasCardio())
+                       .collect(Collectors.toList());
+    }
+
+    public List<WorkoutSession> filterByDateRange(LocalDate from, LocalDate to){
+        return sessions.stream()
+                       .filter(s -> !s.getDate().isBefore(from) && !s.getDate().isAfter(to))
+                       .collect(Collectors.toList());
+
     }
 }
