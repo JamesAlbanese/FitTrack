@@ -52,6 +52,12 @@ public class MainPanel extends JPanel {
         sessionListPanel.setLayout(new BoxLayout(sessionListPanel, BoxLayout.Y_AXIS));
 
         JScrollPane leftScroll = new JScrollPane(sessionListPanel);
+        leftScroll.setBorder(BorderFactory.createTitledBorder("Sessions"));
+        leftScroll.getVerticalScrollBar().setUnitIncrement(10);
+
+        //Right side - workout stats panel
+
+        
 
 
     }
