@@ -1,8 +1,11 @@
 package fittrack;
 
+import com.sun.tools.javac.util.List;
+
 import javax.swing.*;
 import java.awt.*;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class MainPanel extends JPanel {
 
@@ -26,8 +29,8 @@ public class MainPanel extends JPanel {
 
     private void buildUI(){
         add(buildHeader(), BorderLayout.NORTH);
-        add(buildHeader(), BorderLayout.CENTER);
-        add(buildHeader(), BorderLayout.SOUTH);
+        add(buildCenter(), BorderLayout.CENTER);
+        add(buildFooter(), BorderLayout.SOUTH);
     }
 
     private JPanel buildHeader(){
@@ -72,5 +75,22 @@ public class MainPanel extends JPanel {
         return split;
     }
 
+    private JPanel buildFooter(){
+        JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        footer.add(new JLabel("FitTrack Version:1.0 - Data saved locally"));
+        return footer;
+    }
+
+    private void refreshSessionList(){
+        sessionListPanel.removeAll();
+
+        List<WorkoutSession> sorted = manager.sortByDateDescending();
+
+        if(sorted.isEmpty()){
+            sessionListPanel.add(new JLabel(" No sessions yet. Hit '+ Log Workout' to start"));
+        }
+        else{
+            
+        }
     }
 }
