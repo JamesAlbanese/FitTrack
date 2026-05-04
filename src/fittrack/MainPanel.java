@@ -90,7 +90,15 @@ public class MainPanel extends JPanel {
             sessionListPanel.add(new JLabel(" No sessions yet. Hit '+ Log Workout' to start"));
         }
         else{
-            
+            List<WorkoutSession> all = manager.getAllSessions();
+            for(WorkoutSession session : sorted){
+                int originalIndex = all.indexOf(session);
+                sessionListPanel.add(buildSessionRow(session, originalIndex));
+                sessionListPanel.add(new JSeparator());
+            }
         }
+
+        sessionListPanel.revalidate();
+        sessionListPanel.repaint();
     }
 }
