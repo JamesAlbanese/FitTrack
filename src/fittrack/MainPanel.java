@@ -45,7 +45,7 @@ public class MainPanel extends JPanel {
         return header;
     }
 
-    private JSplitPane buildCenter(){
+    private JSplitPane buildCenter() {
         //Left side - list of sessions
 
         sessionListPanel = new JPanel();
@@ -64,7 +64,13 @@ public class MainPanel extends JPanel {
         rightScroll.setBorder(BorderFactory.createTitledBorder("Stats"));
         rightScroll.getVerticalScrollBar().setUnitIncrement(10);
 
+        JSplitPane split = new JSplitPane(
+                JSplitPane.HORIZONTAL_SPLIT, leftScroll, rightScroll);
 
+        split.setDividerLocation(450);
+        split.setResizeWeight(0.5);
+        return split;
+    }
 
     }
 }
