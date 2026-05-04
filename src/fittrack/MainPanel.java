@@ -44,4 +44,15 @@ public class MainPanel extends JPanel {
         header.add(logButton, BorderLayout.EAST);
         return header;
     }
+
+    private JSplitPane buildCenter(){
+        //Left side - list of sessions
+
+        sessionListPanel = new JPanel();
+        sessionListPanel.setLayout(new BoxLayout(sessionListPanel, BoxLayout.Y_AXIS));
+
+        JScrollPane leftScroll = new JScrollPane(sessionListPanel);
+
+
+    }
 }
