@@ -50,4 +50,22 @@ public class FileHandler {
 
         return sessions;
     }
+
+
+    public static boolean deleteData(){
+        File file = new File(WORKOUT_BINARY);
+        if(!file.exists()){
+            return true;
+        }
+        return file.delete();
+    }
+
+
+    public static boolean saveFileExists(){
+        return new File(WORKOUT_BINARY).exists();
+    }
+
+    public static String getDataFileName(){
+        return WORKOUT_BINARY;
+    }
 }
