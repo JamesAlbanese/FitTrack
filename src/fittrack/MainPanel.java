@@ -107,5 +107,24 @@ public class MainPanel extends JPanel {
         JPanel row = new JPanel(new BorderLayout(0, 8));
         row.setBorder(BorderFactory.createEmptyBorder(6, 8, 6, 8));
         row.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        //Left info
+
+        JPanel info = new JPanel(new BorderLayout(8, 0));
+        JLabel dateLabel1 = new JLabel(session.getDate().format(DATE_FORMAT) +
+                " | " + session.getSplitDay().getDisplayName());
+        dateLabel1.setFont(new Font("SansSerif", Font.BOLD, 12));
+
+        JLabel detailLabel1 = new JLabel(session.getExercises().size() +
+                " exercises | " + session.getDurationMins() + " min" +
+                (session.hasCardio() ? " | " + session.getCardio().getCardioType() : ""));
+        detailLabel1.setFont(new Font("SansSerif", Font.PLAIN, 11));
+        detailLabel1.setForeground(Color.GRAY);
+
+        info.add(dateLabel1);
+        info.add(detailLabel1);
+
+
+
     }
 }
