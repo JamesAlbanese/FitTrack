@@ -101,4 +101,11 @@ public class MainPanel extends JPanel {
         sessionListPanel.revalidate();
         sessionListPanel.repaint();
     }
+
+
+    private JPanel buildSessionRow(WorkoutSession session, int index){
+        JPanel row = new JPanel(new BorderLayout(0, 8));
+        row.setBorder(BorderFactory.createEmptyBorder(6, 8, 6, 8));
+        row.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }
 }
