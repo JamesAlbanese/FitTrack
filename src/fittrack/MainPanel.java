@@ -177,6 +177,18 @@ public class MainPanel extends JPanel {
             content.add(new JSeparator());
             content.add(Box.createVerticalStrut(6));
             content.add(boldLabel("Cardio:"));
+
+            CardioSession cardio = session.getCardio();
+            content.add(new JLabel(" "+ cardio.getCardioType()+ " - "+
+                    cardio.getCardioSummary()+ " - "+ cardio.getDuration()+ " min"));
+            content.add(Box.createVerticalStrut(4));
+        }
+
+        if(!session.getNotes().isBlank()){
+            content.add(new JSeparator());
+            content.add(Box.createVerticalStrut(6));
+            content.add(boldLabel("Notes:"));
+            content.add(new JLabel(" "+ session.getNotes()));
         }
     }
 }
