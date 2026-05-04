@@ -2,10 +2,7 @@ package fittrack;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class FitTrackManager {
@@ -140,4 +137,35 @@ public class FitTrackManager {
                        .max()
                        .orElse(0.0);
     }
+
+    public Map<SplitDay, Long> getSessionCountPerSplitDay(){
+        return sessions.stream()
+                .collect(Collectors.groupingBy(WorkoutSession::getSplitDay,
+                                                Collectors.counting()));
+    }
+
+    public Map<String, Integer> getTotalCardioMinutesByType(){
+        return sessions.stream()
+                .filter(WorkoutSession::hasCardio)
+                .collect(Collectors.groupingBy(s -> s.getCardio().getCardioType(),
+                        Collectors.summingInt(s -> s.getCardio().getDuration())));
+    }
+
+
+    public List<String> getAllExerciseNames(){
+        return sessions.stream()
+                .flatMap(s -> s.getExercises().stream())
+                .map(Exercise::getName)
+                .distinct()
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    public Map<TrainingSplit, List<WorkoutSession>> groupSessionBySplit(){
+        return sessions.stream()
+                .collect(Collectors.groupingBy(WorkoutSession::getSplit));
+    }
+
+
+    
 }
