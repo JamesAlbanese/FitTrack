@@ -57,7 +57,13 @@ public class MainPanel extends JPanel {
 
         //Right side - workout stats panel
 
-        
+        statsPanel = new JPanel();
+        statsPanel.setLayout(new BoxLayout(statsPanel, BoxLayout.Y_AXIS));
+
+        JScrollPane rightScroll = new JScrollPane(statsPanel);
+        rightScroll.setBorder(BorderFactory.createTitledBorder("Stats"));
+        rightScroll.getVerticalScrollBar().setUnitIncrement(10);
+
 
 
     }
