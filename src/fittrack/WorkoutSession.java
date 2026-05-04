@@ -3,6 +3,7 @@ package fittrack;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -152,4 +153,7 @@ public class WorkoutSession implements Serializable {
         return sb.toString();
     }
 
+    public List<Exercise> getExercises() {
+        return Collections.unmodifiableList(exercises);
+    }
 }

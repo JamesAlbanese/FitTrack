@@ -103,4 +103,41 @@ public class FitTrackManager {
                        .collect(Collectors.toList());
 
     }
+
+
+    public List<WorkoutSession> searchByExerciseName(String name){
+        String search = name.toLowerCase().trim();
+        return sessions.stream()
+                .filter(s -> s.getExercises()
+                                            .stream()
+                                            .anyMatch(e -> e.getName()
+                                                                    .toLowerCase()
+                                                                    .contains(search)))
+                .collect(Collectors.toList());
+    }
+
+    public int getTotalCardioMins(){
+        return sessions.stream()
+                       .filter(WorkoutSession::hasCardio)
+                       .mapToInt(s -> s.getCardio().getDuration())
+                       .sum();
+    }
+
+
+    public double getAverageDuration(){
+        return sessions.stream()
+                       .mapToInt(WorkoutSession::getDurationMins)
+                       .average()
+                       .orElse(0.0);
+    }
+
+    public double getPersonalRecord(String name){
+        String search = name.toLowerCase().trim();
+        return sessions.stream()
+                       .flatMap(s -> s.getExercises().stream())
+                       .filter(e -> e.getName().toLowerCase().contains(search))
+                       .mapToDouble(Exercise::getMaxWeight)
+                       .max()
+                       .orElse(0.0);
+    }
 }
