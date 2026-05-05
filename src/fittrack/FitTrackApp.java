@@ -24,4 +24,15 @@ public class FitTrackApp extends JFrame {
 
     private static final String MAIN_PANEL = "MAIN";
     private static final String LOG_WORKOUT_PANEL = "LOG_WORKOUT";
+
+
+    public FitTrackApp(){
+        super(TITLE);
+
+        //initialize manager - load saved sessions from disk
+        manager = new FitTrackManager();
+
+        //initialize panels
+        mainPanel = new MainPanel(this, manager);
+    }
 }
