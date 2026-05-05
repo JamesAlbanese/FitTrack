@@ -1,6 +1,9 @@
 package fittrack;
 
 import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LogWorkoutPanel extends JPanel {
 
@@ -29,6 +32,29 @@ public class LogWorkoutPanel extends JPanel {
     private JPanel exerciseListPanel;
     private JLabel exerciseCountLabel;
 
+    //exercise currently being built
+    private Exercise currentExercise;
+
+    //finalized exercise to be saved with the session
+    private final List<Exercise> stagedExercises = new ArrayList<>();
+
+    //cardio fields
+    private JCheckBox includeCardioCheck;
+    private JComboBox<String> cardioTypeCombo;
+    private JTextField cardioDurationField;
+    private JTextField cardioParam1Field;
+    private JTextField cardioParam2Field;
+    private JLabel cardioParam1Label;
+    private JPanel cardioParam2Row;
+
+
+    public LogWorkoutPanel(FitTrackApp app, FitTrackManager manager){
+        this.app = app;
+        this.manager = manager;
+        setLayout(new BorderLayout(5, 5));
+        setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+        buildUI();
+    }
 
 
 
