@@ -292,7 +292,14 @@ public class MainPanel extends JPanel {
             prResultLabel.setFont(new Font("SansSerif", Font.BOLD, 13));
 
             JButton lookupButton = new JButton("Look up PR");
-            lookupButton.addActionListener();//working on it
+            lookupButton.addActionListener(e -> {
+                String selected = (String) prCombo.getSelectedItem();
+                if(selected == null){
+                    return;
+                }
+                double pr = manager.getPersonalRecord(selected);
+                prResultLabel.setText(pr > 0 ? "PR: "+ pr+ " lbs" : "No weighted sets found");
+            });
         }
     }
 
