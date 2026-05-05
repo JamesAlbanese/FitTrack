@@ -300,7 +300,29 @@ public class MainPanel extends JPanel {
                 double pr = manager.getPersonalRecord(selected);
                 prResultLabel.setText(pr > 0 ? "PR: "+ pr+ " lbs" : "No weighted sets found");
             });
+
+            statsPanel.add(prCombo);
+            statsPanel.add(Box.createVerticalStrut(4));
+            statsPanel.add(lookupButton);
+            statsPanel.add(Box.createVerticalStrut(4));
+            statsPanel.add(prResultLabel);
         }
+
+        statsPanel.revalidate();
+        statsPanel.repaint();
+    }
+
+
+    public void refresh(){
+        refreshSessionList();
+        refreshStatsPanel();
+    }
+
+
+    public JLabel boldLabel(String text){
+        JLabel label = new JLabel(text);
+        label.setFont(new Font("SansSerif", Font.BOLD, 12));
+        return label;
     }
 
 }
