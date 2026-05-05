@@ -373,6 +373,18 @@ public class LogWorkoutPanel extends JPanel {
         includeCardioCheck.addActionListener(e -> toggleCardioCheck());//coming soon
         card.add(includeCardioCheck);
         card.add(Box.createVerticalStrut(6));
+
+        cardioTypeCombo = new JComboBox<>(
+                new String[]{"Treadmill", "Stairmaster", "Bike"});
+        cardioTypeCombo.addActionListener(e -> refreshCardioLabels());//coming soon
+
+        cardioDurationField = new JTextField();
+        cardioParam1Field = new JTextField();
+        cardioParam2Field = new JTextField();
+        cardioParam1Label = new JLabel("Speed (mph)");
+
+        cardioParam2Row = buildRow("Incline (%)", cardioParam2Field);
+
     }
 
 
