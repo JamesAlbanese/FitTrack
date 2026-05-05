@@ -296,7 +296,11 @@ public class LogWorkoutPanel extends JPanel {
     private void refreshStagedSets(){
         stagedSetsPanel.removeAll();
         if(currentExercise != null){
-            
+            List<ExerciseSet> sets = currentExercise.getSets();
+            for(int i = 0; i < sets.size(); i++){
+                stagedSetsPanel.add(new JLabel(" Set "+ (i + 1)
+                + ": "+ sets.get(i).toString()));
+            }
         }
     }
 
