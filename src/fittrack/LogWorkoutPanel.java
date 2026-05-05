@@ -155,6 +155,25 @@ public class LogWorkoutPanel extends JPanel {
         card.add(startButton);
         card.add(Box.createVerticalStrut(10));
 
+        //second part(adding sets)
+        card.add(boldLabel("Step 2 - Add Sets"));
+        card.add(Box.createVerticalStrut(10));
+
+        setRepsField = new JTextField();
+        setWeightField = new JTextField();
+        card.add(buildRow("Reps", setRepsField));
+        card.add(Box.createVerticalStrut(4));
+        card.add(buildRow("Weight", setWeightField));
+        card.add(Box.createVerticalStrut(4));
+
+        addSetButton = new JButton("+ Add Set");
+        addSetButton.addActionListener(e -> handleAddSet());
+        addSetButton.setEnabled(false);
+        card.add(addSetButton);
+        card.add(Box.createVerticalStrut(4));
+
+        
+
     }
 
 
