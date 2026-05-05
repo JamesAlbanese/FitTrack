@@ -2,7 +2,9 @@ package fittrack;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -479,6 +481,53 @@ public class LogWorkoutPanel extends JPanel {
 
             WorkoutSession session = new WorkoutSession(date, duration, split, day);
             session.setNotes(notesField.getText().trim());
+
+            for(Exercise exercise: stagedExercises){
+                session.addExercise(exercise);
+            }
+
+            CardioSession cardio = buildCardioSession();
+            if(cardio != null){
+                session.setCardio(cardio);
+            }
+            manager.addSession(session);
+
+            JOptionPane.showMessageDialog(this,
+                    "Session saved successfully",
+                    "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+            resetForm();
+            app.showDashboard();//coming in FitTrackApp
+
+        }catch(DateTimeParseException e){
+            JOptionPane.showMessageDialog(this,
+                    "Invalid date format. Use YYYY-MM-DD.",
+                    "Invalid Input",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Duration and weight must be valid numbers.",
+                    "Invalid Input",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (NegativeValueException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Invalid value: " + e.getMessage(),
+                    "Invalid Input",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (InvalidWorkoutException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Workout error: " + e.getMessage(),
+                    "Invalid Workout",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Could not save to file: " + e.getMessage(),
+                    "File Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } finally {
+            revalidate();
+            repaint();
         }
     }
 

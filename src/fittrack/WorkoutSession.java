@@ -156,4 +156,8 @@ public class WorkoutSession implements Serializable {
     public List<Exercise> getExercises() {
         return Collections.unmodifiableList(exercises);
     }
+
+    public void setCardio(CardioSession cardio){
+        this.cardio = cardio;
+    }
 }
