@@ -549,6 +549,16 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    private JPanel buildSection(String title){
+        JPanel section = new JPanel();
+        section.setLayout(new BoxLayout(section, BoxLayout.Y_AXIS));
+        section.setAlignmentX(Component.LEFT_ALIGNMENT);
+        section.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+        section.setBorder(BorderFactory.createTitledBorder(title));
+        return section;
+    }
+
+
 
 }
 
