@@ -266,7 +266,7 @@ public class LogWorkoutPanel extends JPanel {
 
 
     public handleFinalizeExercise() {
-        if (currentExercise = null) {
+        if (currentExercise == null) {
             JOptionPane.showMessageDialog(this,
                     "No exercise in progress",
                     "No exercise",
