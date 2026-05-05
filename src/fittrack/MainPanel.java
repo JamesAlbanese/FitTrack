@@ -7,6 +7,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 public class MainPanel extends JPanel {
 
@@ -248,6 +249,24 @@ public class MainPanel extends JPanel {
 
         statsPanel.add(new JSeparator());
         statsPanel.add(Box.createVerticalStrut(6));
+
+
+        //display split day breakdown
+        Map<SplitDay, Long> splitCounts = manager.getSessionCountPerSplitDay();
+        if(!splitCounts.isEmpty()){
+            statsPanel.add(boldLabel("Sessions Per Split Day"));
+            splitCounts.entrySet()
+                      .stream()
+                      .sorted(Map.Entry.<SplitDay, Long> comparingByValue().reversed())
+                      .forEach(e -> statsPanel.add(new JLabel(" "+
+                              e.getKey().getDisplayName() + ": "+ e.getValue())));
+
+            statsPanel.add(new JSeparator());
+            statsPanel.add(Box.createVerticalStrut(6));
+        }
+
+
+        
     }
 
 }
