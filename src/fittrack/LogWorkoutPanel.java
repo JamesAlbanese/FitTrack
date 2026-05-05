@@ -114,7 +114,22 @@ public class LogWorkoutPanel extends JPanel {
         dateField = new JTextField(LocalDate.now().toString());
         durationField = new JTextField("60");
         notesField = new JTextField();
+
+        card.add(buildRow("Training Split", splitCombo));
+        card.add(Box.createVerticalStrut(4));
+        card.add("Day", dayCombo);
+        card.add(Box.createVerticalStrut(4));
+        card.add(buildRow("Date (YYYY-MM-DD)", dateField));
+        card.add(Box.createVerticalStrut(4));
+        card.add(buildRow("Duration (min)", durationField));
+        card.add(Box.createVerticalStrut(4));
+        card.add(buildRow("Notes", notesField));
+
+        return card;
     }
+
+
+    
 
 
 
