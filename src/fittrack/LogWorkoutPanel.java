@@ -56,6 +56,23 @@ public class LogWorkoutPanel extends JPanel {
         buildUI();
     }
 
+    private void buildUI(){
+        add(buildHeader(), BorderLayout.NORTH);
+        add(centerBuilder(), BorderLayout.CENTER);
+        add(footerBuilder(), BorderLayout.SOUTH);
+    }
+
+    private JPanel buildHeader(){
+        JPanel header = new JPanel(new BorderLayout());
+        header.setBorder(BorderFactory.createEmptyBorder(0, 0, 8, 0));
+
+        JLabel title = new JLabel("Log Workout");
+        title.setFont(new Font("SansSerif", Font.BOLD, 20));
+
+        JButton backButton = new JButton("<- Back");
+        backButton.addActionListener();
+    }
+
 
 
 }
