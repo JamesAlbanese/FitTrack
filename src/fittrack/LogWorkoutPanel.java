@@ -559,6 +559,20 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    private JPanel buildRow(String textLabel, JComponent component){
+        JPanel row = new JPanel(new BorderLayout(8, 0));
+        row.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+        row.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        JLabel label = new JLabel(textLabel);
+        label.setPreferredSize(new Dimension(140, 24));
+
+        row.add(label, BorderLayout.WEST);
+        row.add(component, BorderLayout.CENTER);
+        return row;
+    }
+
+
 
 }
 
