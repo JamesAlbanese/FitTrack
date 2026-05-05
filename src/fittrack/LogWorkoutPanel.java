@@ -572,6 +572,14 @@ public class LogWorkoutPanel extends JPanel {
         return row;
     }
 
+    
+    private JLabel boldLabel(String text){
+        JLabel label = new JLabel(text);
+        label.setFont(new Font("SansSerif", Font.BOLD, 12));
+        label.setAlignmentX(Component.LEFT_ALIGNMENT);
+        return label;
+    }
+
 
 
 }
