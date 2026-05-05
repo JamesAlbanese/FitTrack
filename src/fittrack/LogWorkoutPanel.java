@@ -326,6 +326,15 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    private JPanel buildFinalizedExerciseRow(int index){
+        Exercise exercise = stagedExercises.get(index);
+
+        JPanel row = new JPanel(new BorderLayout(8, 0));
+        row.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
+
+    }
+
+
 
 }
 
