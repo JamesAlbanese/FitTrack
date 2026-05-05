@@ -435,6 +435,28 @@ public class LogWorkoutPanel extends JPanel {
         }
     }
 
+    private CardioSession buildCardioSession() throws NegativeValueException, InvalidWorkoutException{
+        if(!includeCardioCheck.isSelected()){
+            return null;
+        }
+        int duration = Integer.parseInt(cardioDurationField.getText().trim());
+        String type = (String) cardioTypeCombo.getSelectedItem();
+        switch(type){
+            case "Treadmill":
+                double speed = Double.parseDouble(cardioParam1Field.getText().trim());
+                double incline = Double.parseDouble(cardioParam2Field.getText().trim());
+                return new TreadmillSession(duration, speed, incline);
+            case "Stairmaster":
+                int stairSpeed = Integer.parseInt(cardioParam1Field.getText().trim());
+                return new StairmasterSession(duration, stairSpeed);
+            case "Bike":
+                int resistance = Integer.parseInt(cardioParam1Field.getText().trim());
+                return new BikeSession(duration, resistance);
+            default:
+                return null;
+        }
+    }
+
 
 
 }
