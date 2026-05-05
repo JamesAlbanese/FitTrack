@@ -183,7 +183,34 @@ public class LogWorkoutPanel extends JPanel {
         card.add(stagedSetsPanel);
         card.add(Box.createVerticalStrut(10));
 
+        //third part(finalizing exercise)
+        card.add(boldLabel("Step 3 - Finalize Exercise"));
+        card.add(Box.createVerticalStrut(4));
+        exerciseNotesField = new JTextField();
+        card.add(buildRow("Exercise Notes", exerciseNotesField));
+        card.add(Box.createVerticalStrut(4));
 
+        finalizeButton  = new JButton("✔ Finalize Exercise");
+        finalizeButton.addActionListener(e -> handleFinalizeExercise());
+        finalizeButton.setEnabled(false);
+        card.add(finalizeButton);
+        card.add(Box.createVerticalStrut(10));
+
+        //finalized list of exercises
+        card.add(boldLabel("Exercises add to Session"));
+        card.add(Box.createVerticalStrut(4));
+
+        exerciseCountLabel = new JLabel("0 exercises");
+        exerciseCountLabel.setFont(new Font("SansSerif", Font.ITALIC, 11));
+        exerciseCountLabel.setForeground(Color.GRAY);
+        card.add(exerciseCountLabel);
+        card.add(Box.createVerticalStrut(4));
+
+        exerciseListPanel = new JPanel();
+        exerciseListPanel.setLayout(new BoxLayout(exerciseListPanel, BoxLayout.Y_AXIS));
+        card.add(exerciseListPanel);
+
+        return card;
 
     }
 
