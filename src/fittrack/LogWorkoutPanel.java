@@ -265,5 +265,34 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    public handleFinalizeExercise() {
+        if (currentExercise = null) {
+            JOptionPane.showMessageDialog(this,
+                    "No exercise in progress",
+                    "No exercise",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+        if(!currentExercise.hasSets()){
+            JOptionPane.showMessageDialog(this,
+                    "Add at least one set before finalizing",
+                    "No sets",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        String notes = exerciseNotesField.getText().trim();
+
+        if(!notes.isEmpty()){
+            currentExercise.setNotes(notes);
+        }
+
+        stagedExercises.add(currentExercise);
+        currentExercise = null;
+        refreshExerciseList();//coming soon
+        resetExerciseBuilder();//coming soon
+    }
+
+
+
 }
 
