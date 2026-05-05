@@ -399,11 +399,18 @@ public class LogWorkoutPanel extends JPanel {
     }
 
     private void toggleCardioFields(){
-     boolean enabled = includeCardioCheck.isSelected();
-     setCardioFieldsEnabled(enabled);
-     if(enabled){
-         refreshCardioLabels();
-     }
+        boolean enabled = includeCardioCheck.isSelected();
+        setCardioFieldsEnabled(enabled);
+        if(enabled){
+            refreshCardioLabels();
+        }
+    }
+
+    private void setCardioFieldsEnabled(boolean enabled){
+        cardioTypeCombo.setEnabled(enabled);
+        cardioDurationField.setEnabled(enabled);
+        cardioParam1Field.setEnabled(enabled);
+        cardioParam2Field.setEnabled(enabled);
     }
 
 
