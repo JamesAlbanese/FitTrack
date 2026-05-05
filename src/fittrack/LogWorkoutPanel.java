@@ -62,7 +62,7 @@ public class LogWorkoutPanel extends JPanel {
     private void buildUI(){
         add(buildHeader(), BorderLayout.NORTH);
         add(buildBody(), BorderLayout.CENTER);
-        add(buildfooter(), BorderLayout.SOUTH);
+        add(buildFooter(), BorderLayout.SOUTH);
 
     }
 
@@ -267,7 +267,7 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
-    public handleFinalizeExercise() {
+    public void handleFinalizeExercise() {
         if (currentExercise == null) {
             JOptionPane.showMessageDialog(this,
                     "No exercise in progress",
@@ -372,7 +372,7 @@ public class LogWorkoutPanel extends JPanel {
         JPanel card = buildSection("Cardio (Optional)");//coming soon
 
         includeCardioCheck = new JCheckBox("Include a cardio block");
-        includeCardioCheck.addActionListener(e -> toggleCardioCheck());//coming soon
+        includeCardioCheck.addActionListener(e -> toggleCardioFields());//coming soon
         card.add(includeCardioCheck);
         card.add(Box.createVerticalStrut(6));
 
@@ -572,7 +572,7 @@ public class LogWorkoutPanel extends JPanel {
         return row;
     }
 
-    
+
     private JLabel boldLabel(String text){
         JLabel label = new JLabel(text);
         label.setFont(new Font("SansSerif", Font.BOLD, 12));
