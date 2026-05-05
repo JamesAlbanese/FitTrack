@@ -231,6 +231,23 @@ public class MainPanel extends JPanel {
         }
     }
 
+    private void refreshStatsPanel(){
+        statsPanel.removeAll();
 
+        if(manager.getSessionCount() == 0){
+            statsPanel.add(new JLabel(" Log sessions to see stats"));
+            statsPanel.revalidate();
+            statsPanel.repaint();
+            return;
+        }
+
+        statsPanel.add(boldLabel("Overview:"));
+        statsPanel.add(new JLabel("Sessions: "+ manager.getSessionCount()));
+        statsPanel.add(new JLabel("Avg Duration: "+ String.format("%.0f min",manager.getAverageDuration())));
+        statsPanel.add(new JLabel("Total Cardio: " + manager.getTotalCardioMins()+ " min"));
+
+        statsPanel.add(new JSeparator());
+        statsPanel.add(Box.createVerticalStrut(6));
+    }
 
 }
