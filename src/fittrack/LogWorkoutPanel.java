@@ -172,7 +172,18 @@ public class LogWorkoutPanel extends JPanel {
         card.add(addSetButton);
         card.add(Box.createVerticalStrut(4));
 
-        
+        stagedSetsLabel = new JLabel("No sets added yet");
+        stagedSetsLabel.setFont(new Font("SansSerif", Font.ITALIC, 11));
+        stagedSetsLabel.setForeground(Color.GRAY);
+        card.add(stagedSetsLabel);
+        card.add(Box.createVerticalStrut(4));
+
+        stagedSetsPanel = new JPanel();
+        stagedSetsPanel.setLayout(new BoxLayout(stagedSetsPanel, BoxLayout.Y_AXIS));
+        card.add(stagedSetsPanel);
+        card.add(Box.createVerticalStrut(10));
+
+
 
     }
 
