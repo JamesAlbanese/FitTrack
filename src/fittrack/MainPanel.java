@@ -20,6 +20,7 @@ public class MainPanel extends JPanel {
     private JPanel sessionListPanel;
     private JPanel statsPanel;
     private JComboBox<String> prCombo;
+    private JLabel prResultLabel;
 
     public MainPanel(FitTrackApp app, FitTrackManager manager){
         this.app = app;
@@ -279,7 +280,20 @@ public class MainPanel extends JPanel {
         }
 
         //Exercise personal record lookup
+        List<String> names = manager.getAllExerciseNames();
+        if(!names.isEmpty()){
+            statsPanel.add(new JLabel("Personal Record Lookup"));
+            statsPanel.add(Box.createVerticalStrut(4));
 
+            prCombo = new JComboBox<>(names.toArray(new String[0]));
+            prCombo.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
+
+            prResultLabel = new JLabel(" ");
+            prResultLabel.setFont(new Font("SansSerif", Font.BOLD, 13));
+
+            JButton lookupButton = new JButton("Look up PR");
+            lookupButton.addActionListener();//working on it
+        }
     }
 
 }
