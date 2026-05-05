@@ -307,6 +307,13 @@ public class LogWorkoutPanel extends JPanel {
         stagedSetsPanel.repaint();
     }
 
+    private void clearStagedSets(){
+        stagedSetsPanel.removeAll();
+        stagedSetsLabel.setText("No sets added yet");
+        stagedSetsPanel.revalidate();
+        stagedSetsPanel.repaint();
+    }
+
 
 
 }
