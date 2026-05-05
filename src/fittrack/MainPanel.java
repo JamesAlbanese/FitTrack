@@ -1,6 +1,5 @@
 package fittrack;
 
-import com.sun.tools.javac.util.List;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,7 +43,7 @@ public class MainPanel extends JPanel {
         title.setFont(new Font("SansSerif", Font.BOLD, 20));
 
         JButton logButton = new JButton("+ Log Workout");
-        logButton.addActionListener(/*show workout log*/);
+        logButton.addActionListener(e -> app.showLogWorkout());
 
         header.add(title, BorderLayout.WEST);
         header.add(logButton, BorderLayout.EAST);

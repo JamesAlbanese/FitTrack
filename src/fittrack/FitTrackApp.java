@@ -54,4 +54,13 @@ public class FitTrackApp extends JFrame {
         setVisible(true);
 
     }
+
+    public void showDashboard(){
+        mainPanel.refresh();
+        cardLayout.show(container, MAIN_PANEL);
+    }
+
+    public void showLogWorkout(){
+        cardLayout.show(container, LOG_WORKOUT_PANEL);
+    }
 }
