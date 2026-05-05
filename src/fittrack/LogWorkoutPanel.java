@@ -354,6 +354,18 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    private void resetExerciseBuilder(){
+        exerciseNameField.setText("");
+        setRepsField.setText("");
+        setWeightField.setText("");
+        exerciseNotesField.setText("");
+        clearStagedSets();
+        addSetButton.setEnabled(false);
+        finalizeButton.setEnabled(false);
+        currentExercise = null;
+    }
+
+
 
 }
 
