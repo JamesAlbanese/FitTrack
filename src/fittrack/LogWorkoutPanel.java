@@ -235,7 +235,34 @@ public class LogWorkoutPanel extends JPanel {
         }
     }
 
+    private void handleAddSet(){
+        if(currentExercise == null){
+            JOptionPane.showMessageDialog(this,
+                    "Start and Exrcise first",
+                    "No Exercise",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+            int reps = Integer.parseInt(setRepsField.getText().trim());
+            double weight = Double.parseDouble(setWeightField.getText().trim());
+            currentExercise.addSet(reps, weight);
+            refreshStagedSets();
+            setRepsField.setText("");
+            setWeightField.setText("");
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this,
+                    "Reps and Weight must be valid numbers.",
+                    "Invalid Input",
+                    JOptionPane.ERROR_MESSAGE);
+        }catch(NegativeValueException e){
+            JOptionPane.showMessageDialog(this,
+                    "Invalid Set: "+ e.getMessage(),
+                    "Invalid Input",
+                    JOptionPane.ERROR_MESSAGE);
 
+        }
+    }
 
 
 }
