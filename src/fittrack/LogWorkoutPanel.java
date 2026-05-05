@@ -531,6 +531,23 @@ public class LogWorkoutPanel extends JPanel {
         }
     }
 
+    private void resetForm(){
+        dateField.setText(LocalDate.now().toString());
+        durationField.setText("60");
+        notesField.setText("");
+        stagedExercises.clear();
+        currentExercise = null;
+        refreshExerciseList();
+        clearStagedSets();
+        addSetButton.setEnabled(false);
+        finalizeButton.setEnabled(false);
+        includeCardioCheck.setSelected(false);
+        setCardioFieldsEnabled(false);
+        cardioDurationField.setText("");
+        cardioParam1Field.setText("");
+        cardioParam2Field.setText("");
+    }
+
 
 
 }
