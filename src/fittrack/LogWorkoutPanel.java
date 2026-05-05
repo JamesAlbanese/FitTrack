@@ -463,7 +463,10 @@ public class LogWorkoutPanel extends JPanel {
 
         JButton saveButton = new JButton("Save Session");
         saveButton.setFont(new Font("SansSerif", Font.BOLD, 13));
-        
+        saveButton.addActionListener(e ->handleSaveSession());//coming soon
+
+        footer.add(saveButton);
+        return footer;
     }
 
 
