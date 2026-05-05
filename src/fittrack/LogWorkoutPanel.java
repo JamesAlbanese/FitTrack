@@ -366,6 +366,16 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    private JPanel buildCardioSection(){
+        JPanel card = buildSection("Cardio (Optional)");//coming soon
+
+        includeCardioCheck = new JCheckBox("Include a cardio block");
+        includeCardioCheck.addActionListener(e -> toggleCardioCheck());//coming soon
+        card.add(includeCardioCheck);
+        card.add(Box.createVerticalStrut(6));
+    }
+
+
 
 }
 
