@@ -301,7 +301,10 @@ public class LogWorkoutPanel extends JPanel {
                 stagedSetsPanel.add(new JLabel(" Set "+ (i + 1)
                 + ": "+ sets.get(i).toString()));
             }
+            stagedSetsLabel.setText(sets.size()+ " set(s) added");
         }
+        stagedSetsPanel.revalidate();
+        stagedSetsPanel.repaint();
     }
 
 
