@@ -58,8 +58,9 @@ public class LogWorkoutPanel extends JPanel {
 
     private void buildUI(){
         add(buildHeader(), BorderLayout.NORTH);
-        add(centerBuilder(), BorderLayout.CENTER);
-        add(footerBuilder(), BorderLayout.SOUTH);
+        add(buildBody(), BorderLayout.CENTER);
+        add(buildfooter(), BorderLayout.SOUTH);
+
     }
 
     private JPanel buildHeader(){
@@ -70,8 +71,29 @@ public class LogWorkoutPanel extends JPanel {
         title.setFont(new Font("SansSerif", Font.BOLD, 20));
 
         JButton backButton = new JButton("<- Back");
-        backButton.addActionListener();
+        backButton.addActionListener(e -> app.showDashboard());//going to create this in fittrackapp
+
+        header.add(backButton, BorderLayout.WEST);
+        header.add(title, BorderLayout.CENTER);
+        return header;
     }
+
+
+    private JPanel buildBody(){
+        JPanel body = new JPanel();
+        body.setLayout(new BoxLayout(body, BoxLayout.Y_AXIS));
+        body.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
+
+        body.add(buildSessionInfoSection());//coming soon...
+        body.add(Box.createVerticalStrut(10));
+        body.add(buildExerciseSection());//coming soon...
+        body.add(Box.createVerticalStrut(10));
+        body.add(buildCardioSection());//coming soon...
+
+
+        JScrollPane scroll = new JScrollPane(body);
+    }
+
 
 
 
