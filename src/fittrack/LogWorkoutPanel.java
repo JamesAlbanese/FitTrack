@@ -2,6 +2,7 @@ package fittrack;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,6 +93,27 @@ public class LogWorkoutPanel extends JPanel {
 
 
         JScrollPane scroll = new JScrollPane(body);
+        scroll.getVerticalScrollBar().setUnitIncrement(10);
+        scroll.setBorder(null);
+
+        JPanel wrapper = new JPanel(new BorderLayout());
+        wrapper.add(scroll, BorderLayout.CENTER);
+        return wrapper;
+    }
+
+
+    private JPanel buildSessionInfoSection(){
+        JPanel card = buildSection("Session Info"); //helper coming like boldLabel in MainPanel
+
+        splitCombo = new JComboBox<>(TrainingSplit.values());
+        splitCombo.addActionListener(e -> refreshDayCombo());//helper comin soon
+
+        dayCombo = new JComboBox<>();
+        refreshDayCombo();
+
+        dateField = new JTextField(LocalDate.now().toString());
+        durationField = new JTextField("60");
+        notesField = new JTextField();
     }
 
 
