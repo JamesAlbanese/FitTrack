@@ -332,6 +332,15 @@ public class LogWorkoutPanel extends JPanel {
         JPanel row = new JPanel(new BorderLayout(8, 0));
         row.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
 
+
+        JPanel info = new JPanel();
+        info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
+        for(String line : exercise.toString().split("\n")){
+            JLabel label = new JLabel(line);
+            label.setFont(new Font("SansSerif", Font.PLAIN, 12));
+            info.add(label);
+        }
+
     }
 
 
