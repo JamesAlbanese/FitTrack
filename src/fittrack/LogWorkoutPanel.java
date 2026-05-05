@@ -457,6 +457,15 @@ public class LogWorkoutPanel extends JPanel {
         }
     }
 
+    private JPanel buildFooter(){
+        JPanel footer = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        footer.setBorder(BorderFactory.createEmptyBorder(8, 0, 0, 0));
+
+        JButton saveButton = new JButton("Save Session");
+        saveButton.setFont(new Font("SansSerif", Font.BOLD, 13));
+        
+    }
+
 
 
 }
