@@ -265,8 +265,21 @@ public class MainPanel extends JPanel {
             statsPanel.add(Box.createVerticalStrut(6));
         }
 
+        //Cardio breakdown
+        Map<String, Integer> cardioMap = manager.getTotalCardioMinutesByType();
+        if(!cardioMap.isEmpty()){
+            statsPanel.add(boldLabel("Cardio type by (min)"));
+            cardioMap.entrySet()
+                    .stream()
+                    .sorted(Map.Entry.<String, Integer> comparingByValue().reversed())
+                    .forEach(e -> statsPanel.add(new JLabel(" "+
+                            e.getKey()+ ": "+ e.getValue()+ " min")));
+            statsPanel.add(new JSeparator());
+            statsPanel.add(Box.createVerticalStrut(6));
+        }
 
-        
+        //Exercise personal record lookup
+
     }
 
 }
