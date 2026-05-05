@@ -413,6 +413,28 @@ public class LogWorkoutPanel extends JPanel {
         cardioParam2Field.setEnabled(enabled);
     }
 
+    private void refreshCardioLabels(){
+        String type = (String) cardioTypeCombo.getSelectedItem();
+        if(type == null) {
+            return;
+        }
+        switch (type){
+            case "Treadmill":
+                cardioParam1Label.setText("Speed (min)");
+                cardioParam2Row.setVisible(true);
+                break;
+            case "Stairmaster":
+                cardioParam1Label.setText("Speed (steps/min)");
+                cardioParam2Row.setVisible(false);
+                break;
+            case "Bike":
+                cardioParam1Label.setText("Resistance (1-20)");
+                cardioParam2Row.setVisible(false);
+                break;
+
+        }
+    }
+
 
 
 }
