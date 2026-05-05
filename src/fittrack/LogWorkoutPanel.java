@@ -314,6 +314,15 @@ public class LogWorkoutPanel extends JPanel {
         stagedSetsPanel.repaint();
     }
 
+    private void refreshExerciseList(){
+        exerciseListPanel.removeAll();
+        for(int i = 0; i < stagedExercises.size(); i++){
+            exerciseListPanel.add(buildFinalizedExerciseRow(i));//coming soon
+            exerciseListPanel.add(Box.createVerticalStrut(4));
+        }
+        
+    }
+
 
 
 }
