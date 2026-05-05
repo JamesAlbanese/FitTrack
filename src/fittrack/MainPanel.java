@@ -4,6 +4,7 @@ import com.sun.tools.javac.util.List;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -173,6 +174,7 @@ public class MainPanel extends JPanel {
             }
         }
 
+        //Cardio
         if(session.hasCardio()){
             content.add(new JSeparator());
             content.add(Box.createVerticalStrut(6));
@@ -184,11 +186,51 @@ public class MainPanel extends JPanel {
             content.add(Box.createVerticalStrut(4));
         }
 
+        //Notes
         if(!session.getNotes().isBlank()){
             content.add(new JSeparator());
             content.add(Box.createVerticalStrut(6));
             content.add(boldLabel("Notes:"));
             content.add(new JLabel(" "+ session.getNotes()));
         }
+
+        //Scroll wrap
+        JScrollPane scroll = new JScrollPane(content);
+        scroll.setPreferredSize(new Dimension(420, 350));
+
+        //Show popup
+        String[] options = {"Close", "Delete Session"};
+        int choice = JOptionPane.showOptionDialog(
+                this, scroll, "Session Detail",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null, options, options[0]
+        );
+
+        if(choice == 1){
+            int confirm = JOptionPane.showConfirmDialog(
+                    this,
+                    "Delete this session? Action cannot be undone",
+                    "Confirm Delete",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+            );
+            if(confirm == JOptionPane.YES_OPTION){
+                try{
+                    manager.removeSession(index);
+                    refresh();//will refresh both session log and stats panel
+                }catch(InvalidWorkoutException | IOException e){
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Could not delete: " + e.getMessage(),
+                            "Error", JOptionPane.ERROR_MESSAGE
+
+                    );
+                }
+            }
+        }
     }
+
+
+
 }
