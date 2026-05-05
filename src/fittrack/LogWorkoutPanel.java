@@ -385,6 +385,17 @@ public class LogWorkoutPanel extends JPanel {
 
         cardioParam2Row = buildRow("Incline (%)", cardioParam2Field);
 
+        card.add(buildRow("Type", cardioTypeCombo));
+        card.add(Box.createVerticalStrut(4));
+        card.add(buildRow("Duration (min)", cardioDurationField));
+        card.add(Box.createVerticalStrut(4));
+        card.add(buildRow("Speed / Level", cardioParam1Field));
+        card.add(Box.createVerticalStrut(4));
+        card.add(cardioParam2Row);
+
+        setCardioFieldsEnabled(false);
+        return card;
+
     }
 
 
