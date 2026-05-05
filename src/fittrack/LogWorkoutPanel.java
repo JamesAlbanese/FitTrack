@@ -129,7 +129,21 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
-    
+    private void refreshDayCombo(){
+        TrainingSplit selected = (TrainingSplit) splitCombo.getSelectedItem();
+        dayCombo.removeAllItems();
+        if(selected != null){
+            for(SplitDay day: selected.getDays()){
+                dayCombo.addItem(day);
+            }
+        }
+    }
+
+    private JPanel buildExerciseSection(){
+        JPanel card = buildSection("Exercises");
+
+        
+    }
 
 
 
