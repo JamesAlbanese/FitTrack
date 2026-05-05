@@ -42,8 +42,16 @@ public class FitTrackApp extends JFrame {
         container.add(mainPanel, MAIN_PANEL);
         container.add(logWorkoutPanel, LOG_WORKOUT_PANEL);
 
+        //setup JFrame
+        setContentPane(container);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(APP_WIDTH, APP_HEIGHT);
+        setMinimumSize(new Dimension(700, 500));
+        setLocationRelativeTo(null);
 
-        
+        //show MainPanel first
+        showDashboard();
+        setVisible(true);
 
     }
 }
