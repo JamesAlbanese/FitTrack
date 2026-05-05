@@ -142,7 +142,19 @@ public class LogWorkoutPanel extends JPanel {
     private JPanel buildExerciseSection(){
         JPanel card = buildSection("Exercises");
 
-        
+        //first part(naming exercise)
+        card.add(boldLabel("Step 1 - Name the Exercise"));
+        card.add(Box.createVerticalStrut(4));
+
+        exerciseNameField = new JTextField();
+        card.add(buildRow("Exercise Name", exerciseNameField));
+        card.add(Box.createVerticalStrut(4));
+
+        JButton startButton = new JButton("Start Exercise");
+        startButton.addActionListener(e -> handleStartExercise());
+        card.add(startButton);
+        card.add(Box.createVerticalStrut(10));
+
     }
 
 
