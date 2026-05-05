@@ -34,5 +34,16 @@ public class FitTrackApp extends JFrame {
 
         //initialize panels
         mainPanel = new MainPanel(this, manager);
+        logWorkoutPanel = new LogWorkoutPanel(this, manager);
+
+        //setup card layout container
+        cardLayout = new CardLayout();
+        container = new JPanel(cardLayout);
+        container.add(mainPanel, MAIN_PANEL);
+        container.add(logWorkoutPanel, LOG_WORKOUT_PANEL);
+
+
+        
+
     }
 }
