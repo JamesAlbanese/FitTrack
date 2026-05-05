@@ -470,6 +470,19 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    private void handleSaveSession(){
+        try{
+            LocalDate date = LocalDate.parse(dateField.getText().trim());
+            int duration = Integer.parseInt(durationField.getText().trim());
+            TrainingSplit split = (TrainingSplit) splitCombo.getSelectedItem();
+            SplitDay day = (SplitDay) dayCombo.getSelectedItem();
+
+            WorkoutSession session = new WorkoutSession(date, duration, split, day);
+            session.setNotes(notesField.getText().trim());
+        }
+    }
+
+
 
 }
 
