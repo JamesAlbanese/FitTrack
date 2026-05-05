@@ -320,7 +320,9 @@ public class LogWorkoutPanel extends JPanel {
             exerciseListPanel.add(buildFinalizedExerciseRow(i));//coming soon
             exerciseListPanel.add(Box.createVerticalStrut(4));
         }
-        
+        exerciseCountLabel.setText(stagedExercises.size() + " exercise(s)");
+        exerciseListPanel.revalidate();
+        exerciseListPanel.repaint();
     }
 
 
