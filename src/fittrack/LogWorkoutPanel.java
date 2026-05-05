@@ -341,6 +341,16 @@ public class LogWorkoutPanel extends JPanel {
             info.add(label);
         }
 
+        JButton removeButton = new JButton("X");
+        removeButton.setFont(new Font("SansSerif", Font.BOLD, 11));
+        removeButton.addActionListener(e -> {
+            stagedExercises.remove(index);
+            refreshExerciseList();
+        });
+
+        row.add(info, BorderLayout.CENTER);
+        row.add(removeButton, BorderLayout.EAST);
+        return row;
     }
 
 
