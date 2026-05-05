@@ -215,6 +215,27 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    private void handleStartExercise(){
+        String name = exerciseNameField.getText().trim();
+        try{
+            currentExercise = Exercise.create(name);
+            clearStagedSets();//coming soon
+            addSetButton.setEnabled(true);
+            finalizeButton.setEnabled(true);
+
+            JOptionPane.showMessageDialog(this,
+                    "Exercise '"+ name +"' started. Now add sets.",
+                    "Exercise started",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }catch(InvalidWorkoutException e){
+            JOptionPane.showMessageDialog(this,
+                    "Exercise name cannot be blank",
+                    "Invalid Input",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+
 
 
 }
