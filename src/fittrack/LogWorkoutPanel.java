@@ -293,6 +293,14 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    private void refreshStagedSets(){
+        stagedSetsPanel.removeAll();
+        if(currentExercise != null){
+            
+        }
+    }
+
+
 
 }
 
