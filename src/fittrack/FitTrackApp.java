@@ -63,4 +63,8 @@ public class FitTrackApp extends JFrame {
     public void showLogWorkout(){
         cardLayout.show(container, LOG_WORKOUT_PANEL);
     }
+
+    public static void main(String[] args){
+        SwingUtilities.invokeLater(FitTrackApp::new);
+    }
 }
