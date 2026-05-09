@@ -8,6 +8,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+ * The main screen of the FitTrack application.
+ * Displays a scrollable session list on the left and a stats panel on the right.
+ * Clicking a session row opens a detail popup where the user can view or delete it.
+ *
+ * @author  James Albanese
+ * @version 1.0
+ * @since   5-8-2026
+ */
 public class MainPanel extends JPanel {
 
     private static final DateTimeFormatter DATE_FORMAT =
@@ -21,6 +31,13 @@ public class MainPanel extends JPanel {
     private JComboBox<String> prCombo;
     private JLabel prResultLabel;
 
+
+    /**
+     * Constructs the MainPanel with references to the app and manager.
+     *
+     * @param app     the main application frame
+     * @param manager the core logic manager
+     */
     public MainPanel(FitTrackApp app, FitTrackManager manager){
         this.app = app;
         this.manager = manager;
@@ -29,12 +46,22 @@ public class MainPanel extends JPanel {
         buildUI();
     }
 
+
+    /**
+     * Builds and assembles all UI sections of the main panel.
+     */
     private void buildUI(){
         add(buildHeader(), BorderLayout.NORTH);
         add(buildCenter(), BorderLayout.CENTER);
         add(buildFooter(), BorderLayout.SOUTH);
     }
 
+
+    /**
+     * Builds the top header bar with the app title and log workout button.
+     *
+     * @return header JPanel
+     */
     private JPanel buildHeader(){
         JPanel header = new JPanel(new BorderLayout());
         header.setBorder(BorderFactory.createEmptyBorder(0, 0, 8, 0));
@@ -50,6 +77,13 @@ public class MainPanel extends JPanel {
         return header;
     }
 
+
+    /**
+     * Builds the center split pane with the session list on the left
+     * and the stats panel on the right.
+     *
+     * @return center JSplitPane
+     */
     private JSplitPane buildCenter() {
         //Left side - list of sessions
 
@@ -77,12 +111,23 @@ public class MainPanel extends JPanel {
         return split;
     }
 
+
+    /**
+     * Builds the bottom footer bar showing the app version.
+     *
+     * @return footer JPanel
+     */
     private JPanel buildFooter(){
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER));
         footer.add(new JLabel("FitTrack Version:1.0 - Data saved locally"));
         return footer;
     }
 
+
+    /**
+     * Rebuilds the session list from the manager sorted by date descending.
+     * Shows an empty state message if no sessions exist.
+     */
     private void refreshSessionList(){
         sessionListPanel.removeAll();
 
@@ -105,6 +150,15 @@ public class MainPanel extends JPanel {
     }
 
 
+    /**
+     * Builds a single clickable session row showing the date, split day,
+     * exercise count, duration, and cardio type if present.
+     * Clicking the row opens a detail popup for that session.
+     *
+     * @param session the session to display
+     * @param index   the index of the session in the manager
+     * @return session row JPanel
+     */
     private JPanel buildSessionRow(WorkoutSession session, int index){
         JPanel row = new JPanel(new BorderLayout(0, 8));
         row.setBorder(BorderFactory.createEmptyBorder(6, 8, 6, 8));
@@ -112,7 +166,7 @@ public class MainPanel extends JPanel {
 
         //Left info
 
-        JPanel info = new JPanel(new BorderLayout(8, 0));
+        JPanel info = new JPanel(new BorderLayout(2, 1));
         JLabel dateLabel1 = new JLabel(session.getDate().format(DATE_FORMAT) +
                 " | " + session.getSplitDay().getDisplayName());
         dateLabel1.setFont(new Font("SansSerif", Font.BOLD, 12));
@@ -147,6 +201,15 @@ public class MainPanel extends JPanel {
     }
 
 
+    /**
+     * Shows a JOptionPane popup with the full details of a session.
+     * Displays the date, split, duration, exercises with sets,
+     * optional cardio, and optional notes.
+     * Provides a Delete Session button that removes the session after confirmation.
+     *
+     * @param session the session to display
+     * @param index   the index of the session in the manager
+     */
     private void showSessionDetailPopup(WorkoutSession session, int index){
         JPanel content = new JPanel();
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
@@ -232,6 +295,12 @@ public class MainPanel extends JPanel {
         }
     }
 
+
+    /**
+     * Rebuilds the right stats panel with fresh data from the manager.
+     * Shows overview stats, sessions per split day, cardio breakdown,
+     * and a personal record lookup. Shows an empty state if no sessions exist.
+     */
     private void refreshStatsPanel(){
         statsPanel.removeAll();
 
@@ -312,12 +381,22 @@ public class MainPanel extends JPanel {
     }
 
 
+    /**
+     * Refreshes both the session list and the stats panel with fresh data.
+     * Called every time this panel becomes visible.
+     */
     public void refresh(){
         refreshSessionList();
         refreshStatsPanel();
     }
 
 
+    /**
+     * Creates a bold JLabel used for section headings throughout the panel.
+     *
+     * @param text the label text
+     * @return bold JLabel
+     */
     public JLabel boldLabel(String text){
         JLabel label = new JLabel(text);
         label.setFont(new Font("SansSerif", Font.BOLD, 12));

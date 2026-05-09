@@ -8,6 +8,17 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Panel for logging a new WorkoutSession.
+ * Guides the user through three steps: naming an exercise, adding sets
+ * one by one, and finalizing the exercise. Also supports an optional
+ * cardio block and saves the completed session via FitTrackManager.
+ *
+ * @author  James Albanese
+ * @version 1.0
+ * @since   5-8-2026
+ */
 public class LogWorkoutPanel extends JPanel {
 
     //app and manager
@@ -51,6 +62,12 @@ public class LogWorkoutPanel extends JPanel {
     private JPanel cardioParam2Row;
 
 
+    /**
+     * Constructs the LogWorkoutPanel with references to the app and manager.
+     *
+     * @param app     the main application frame
+     * @param manager the core logic manager
+     */
     public LogWorkoutPanel(FitTrackApp app, FitTrackManager manager){
         this.app = app;
         this.manager = manager;
@@ -59,6 +76,10 @@ public class LogWorkoutPanel extends JPanel {
         buildUI();
     }
 
+
+    /**
+     * Builds and assembles all UI sections of the log workout panel.
+     */
     private void buildUI(){
         add(buildHeader(), BorderLayout.NORTH);
         add(buildBody(), BorderLayout.CENTER);
@@ -66,6 +87,12 @@ public class LogWorkoutPanel extends JPanel {
 
     }
 
+
+    /**
+     * Builds the top header bar with the panel title and back button.
+     *
+     * @return header JPanel
+     */
     private JPanel buildHeader(){
         JPanel header = new JPanel(new BorderLayout());
         header.setBorder(BorderFactory.createEmptyBorder(0, 0, 8, 0));
@@ -82,6 +109,12 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    /**
+     * Builds the scrollable body containing all three form sections:
+     * session info, exercise builder, and optional cardio.
+     *
+     * @return scrollable body JPanel
+     */
     private JPanel buildBody(){
         JPanel body = new JPanel();
         body.setLayout(new BoxLayout(body, BoxLayout.Y_AXIS));
@@ -104,6 +137,11 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    /**
+     * Builds the session info section with split, day, date, duration, and notes fields.
+     *
+     * @return session info JPanel
+     */
     private JPanel buildSessionInfoSection(){
         JPanel card = buildSection("Session Info"); //helper coming like boldLabel in MainPanel
 
@@ -131,6 +169,10 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    /**
+     * Repopulates the day dropdown based on the currently selected split.
+     * Called automatically when the split selection changes.
+     */
     private void refreshDayCombo(){
         TrainingSplit selected = (TrainingSplit) splitCombo.getSelectedItem();
         dayCombo.removeAllItems();
@@ -141,6 +183,14 @@ public class LogWorkoutPanel extends JPanel {
         }
     }
 
+
+    /**
+     * Builds the exercise builder section with the three step flow.
+     * Step 1 names the exercise, Step 2 adds sets, Step 3 finalizes it.
+     * Also shows the list of all finalized exercises added to the session.
+     *
+     * @return exercise section JPanel
+     */
     private JPanel buildExerciseSection(){
         JPanel card = buildSection("Exercises");
 
@@ -217,6 +267,11 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    /**
+     * Handles the Start Exercise button.
+     * Creates a new Exercise with the entered name and enables
+     * the set input fields and finalize button.
+     */
     private void handleStartExercise(){
         String name = exerciseNameField.getText().trim();
         try{
@@ -237,6 +292,12 @@ public class LogWorkoutPanel extends JPanel {
         }
     }
 
+
+    /**
+     * Handles the Add Set button.
+     * Reads reps and weight from the input fields and calls addSet()
+     * on the current exercise. Refreshes the staged sets display after each add.
+     */
     private void handleAddSet(){
         if(currentExercise == null){
             JOptionPane.showMessageDialog(this,
@@ -267,6 +328,11 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    /**
+     * Handles the Finalize Exercise button.
+     * Attaches notes to the current exercise, adds it to the staged list,
+     * refreshes the finalized exercise list, and resets the builder.
+     */
     public void handleFinalizeExercise() {
         if (currentExercise == null) {
             JOptionPane.showMessageDialog(this,
@@ -295,6 +361,10 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    /**
+     * Rebuilds the staged sets display for the current exercise in progress.
+     * Shows each set on its own line with its number, reps, and weight.
+     */
     private void refreshStagedSets(){
         stagedSetsPanel.removeAll();
         if(currentExercise != null){
@@ -309,6 +379,11 @@ public class LogWorkoutPanel extends JPanel {
         stagedSetsPanel.repaint();
     }
 
+
+    /**
+     * Clears the staged sets display and resets the sets label.
+     * Called when starting a new exercise or resetting the form.
+     */
     private void clearStagedSets(){
         stagedSetsPanel.removeAll();
         stagedSetsLabel.setText("No sets added yet");
@@ -316,6 +391,11 @@ public class LogWorkoutPanel extends JPanel {
         stagedSetsPanel.repaint();
     }
 
+
+    /**
+     * Rebuilds the finalized exercise list showing all exercises
+     * added to the session so far. Each row includes a remove button.
+     */
     private void refreshExerciseList(){
         exerciseListPanel.removeAll();
         for(int i = 0; i < stagedExercises.size(); i++){
@@ -328,6 +408,13 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    /**
+     * Builds a single row displaying a finalized exercise with a remove button.
+     * Uses the exercise toString() split by newline to show each set on its own line.
+     *
+     * @param index the index of the exercise in the staged exercises list
+     * @return finalized exercise row JPanel
+     */
     private JPanel buildFinalizedExerciseRow(int index){
         Exercise exercise = stagedExercises.get(index);
 
@@ -356,6 +443,11 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    /**
+     * Resets the exercise builder fields after an exercise is finalized.
+     * Clears all input fields, wipes the staged sets display, and
+     * disables the add set and finalize buttons.
+     */
     private void resetExerciseBuilder(){
         exerciseNameField.setText("");
         setRepsField.setText("");
@@ -368,6 +460,13 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    /**
+     * Builds the optional cardio section with a checkbox to enable it.
+     * Shows fields for cardio type, duration, speed or resistance, and
+     * incline for Treadmill only. All fields start disabled.
+     *
+     * @return cardio section JPanel
+     */
     private JPanel buildCardioSection(){
         JPanel card = buildSection("Cardio (Optional)");//coming soon
 
@@ -400,6 +499,11 @@ public class LogWorkoutPanel extends JPanel {
 
     }
 
+
+    /**
+     * Enables or disables all cardio input fields based on the checkbox state.
+     * Also refreshes the cardio labels when enabling.
+     */
     private void toggleCardioFields(){
         boolean enabled = includeCardioCheck.isSelected();
         setCardioFieldsEnabled(enabled);
@@ -408,6 +512,12 @@ public class LogWorkoutPanel extends JPanel {
         }
     }
 
+
+    /**
+     * Enables or disables all four cardio input components at once.
+     *
+     * @param enabled true to enable, false to disable
+     */
     private void setCardioFieldsEnabled(boolean enabled){
         cardioTypeCombo.setEnabled(enabled);
         cardioDurationField.setEnabled(enabled);
@@ -415,6 +525,12 @@ public class LogWorkoutPanel extends JPanel {
         cardioParam2Field.setEnabled(enabled);
     }
 
+
+    /**
+     * Updates the first cardio parameter label and shows or hides the
+     * incline row based on the selected cardio type.
+     * Treadmill shows speed and incline. Stairmaster and Bike show speed or resistance only.
+     */
     private void refreshCardioLabels(){
         String type = (String) cardioTypeCombo.getSelectedItem();
         if(type == null) {
@@ -437,6 +553,15 @@ public class LogWorkoutPanel extends JPanel {
         }
     }
 
+
+    /**
+     * Builds and returns a CardioSession from the current cardio input fields.
+     * Returns null if the include cardio checkbox is not selected.
+     *
+     * @return CardioSession or null
+     * @throws NegativeValueException  if any numeric value is invalid
+     * @throws InvalidWorkoutException if session data is structurally invalid
+     */
     private CardioSession buildCardioSession() throws NegativeValueException, InvalidWorkoutException{
         if(!includeCardioCheck.isSelected()){
             return null;
@@ -459,6 +584,12 @@ public class LogWorkoutPanel extends JPanel {
         }
     }
 
+
+    /**
+     * Builds the bottom footer containing the Save Session button.
+     *
+     * @return footer JPanel
+     */
     private JPanel buildFooter(){
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         footer.setBorder(BorderFactory.createEmptyBorder(8, 0, 0, 0));
@@ -472,6 +603,12 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    /**
+     * Handles the Save Session button.
+     * Reads all session info fields, builds the WorkoutSession, attaches
+     * all staged exercises and optional cardio, then saves via FitTrackManager.
+     * Shows a success popup on save or an error popup if anything is invalid.
+     */
     private void handleSaveSession(){
         try{
             LocalDate date = LocalDate.parse(dateField.getText().trim());
@@ -531,6 +668,12 @@ public class LogWorkoutPanel extends JPanel {
         }
     }
 
+
+    /**
+     * Resets all form fields back to their default state.
+     * Clears exercises, cardio, and all input fields.
+     * Called after a session is saved successfully.
+     */
     private void resetForm(){
         dateField.setText(LocalDate.now().toString());
         durationField.setText("60");
@@ -549,6 +692,13 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    /**
+     * Builds a titled section panel used as a container for each form section.
+     * Stacks components vertically using BoxLayout.
+     *
+     * @param title the section title shown in the border
+     * @return section JPanel
+     */
     private JPanel buildSection(String title){
         JPanel section = new JPanel();
         section.setLayout(new BoxLayout(section, BoxLayout.Y_AXIS));
@@ -559,6 +709,14 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    /**
+     * Builds a labeled form row pairing a text label on the left
+     * with an input component on the right.
+     *
+     * @param textLabel the label text
+     * @param component the input component
+     * @return form row JPanel
+     */
     private JPanel buildRow(String textLabel, JComponent component){
         JPanel row = new JPanel(new BorderLayout(8, 0));
         row.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
@@ -573,6 +731,12 @@ public class LogWorkoutPanel extends JPanel {
     }
 
 
+    /**
+     * Creates a bold JLabel used for step headings and section labels.
+     *
+     * @param text the label text
+     * @return bold JLabel
+     */
     private JLabel boldLabel(String text){
         JLabel label = new JLabel(text);
         label.setFont(new Font("SansSerif", Font.BOLD, 12));

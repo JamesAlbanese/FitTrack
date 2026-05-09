@@ -3,6 +3,17 @@ package fittrack;
 import javax.swing.*;
 import java.awt.*;
 
+
+/**
+ * The main application window for FitTrack.
+ * Creates the JFrame, initializes the FitTrackManager, and manages
+ * switching between MainPanel and LogWorkoutPanel using a CardLayout.
+ * This is the entry point of the application.
+ *
+ * @author  James Albanese
+ * @version 1.0
+ * @since   5-8-2026
+ */
 public class FitTrackApp extends JFrame {
 
     private static final String TITLE = "FitTrack";
@@ -26,6 +37,10 @@ public class FitTrackApp extends JFrame {
     private static final String LOG_WORKOUT_PANEL = "LOG_WORKOUT";
 
 
+    /**
+     * Constructs the FitTrackApp window, initializes all panels,
+     * and displays the main screen.
+     */
     public FitTrackApp(){
         super(TITLE);
 
@@ -55,15 +70,32 @@ public class FitTrackApp extends JFrame {
 
     }
 
+
+    /**
+     * Switches to the main panel and refreshes its content.
+     * Called after logging or deleting a session to update the display.
+     */
     public void showDashboard(){
         mainPanel.refresh();
         cardLayout.show(container, MAIN_PANEL);
     }
 
+
+    /**
+     * Switches to the log workout panel.
+     * Called when the user clicks the Log Workout button.
+     */
     public void showLogWorkout(){
         cardLayout.show(container, LOG_WORKOUT_PANEL);
     }
 
+
+    /**
+     * Application entry point.
+     * Launches FitTrack on the Swing event dispatch thread.
+     *
+     * @param args command line arguments
+     */
     public static void main(String[] args){
         SwingUtilities.invokeLater(FitTrackApp::new);
     }
